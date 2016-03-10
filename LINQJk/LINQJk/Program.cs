@@ -9,7 +9,8 @@ namespace LINQJk
     class Program
     {
         /// <summary>
-        /// Demonstrations of LINQ to object queries. Mostly adapted from C# Had First, O'Reilly and from MSDN.
+        /// Demonstrations of LINQ to object queries. Mostly adapted from C# Had First, O'Reilly and from MSDN
+        /// at https://msdn.microsoft.com/en-us/library/bb397900.aspx.
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
@@ -121,7 +122,7 @@ namespace LINQJk
                    new Student {First="Michael", Last="Tucker", ID=122, Scores= new List<int> {94, 92, 91, 91} }
                 };
 
-            students.Add(new Student { First = "Jake", Last = "Keller", ID = 123, Scores = new List<int> { 20, 80, 22, 54 } });
+            //students.Add(new Student { First = "Jake", Last = "Keller", ID = 123, Scores = new List<int> { 20, 80, 22, 54 } });
 
             //Simple query
             //var studentQuery = from student in students
@@ -139,21 +140,20 @@ namespace LINQJk
             */
 
             // studentQuery2 is an IEnumerable<IGrouping<char, Student>>
-            var studentQuery2 = from student in students
-                                group student by student.Last[0];
+            //var studentQuery2 = from student in students
+            //                    group student by student.Last[0];
 
             //// To order it I can do this:
             //var studentQuery2 = from student in students
             //                    orderby student.Last[0]
             //                    group student by student.Last[0];
-            
+
             // Or this, using "into" and studentGroup.Key
-            //var studentQuery2 =
-            //    from student in students
-            //        // orderby student.Last[0]
-            //    group student by student.Last[0] into studentGroup
-            //    orderby studentGroup.Key
-            //    select studentGroup;
+            var studentQuery2 =
+                from student in students
+                group student by student.Last[0] into studentGroup
+                orderby studentGroup.Key
+                select studentGroup;
 
             /*
             "Note that the type of the query has now changed. 
@@ -220,9 +220,26 @@ namespace LINQJk
                                    select totalScore).Average();
             Console.WriteLine("Class average score = {0}", averageScore);
 
+            /*
+            Anonymous type in the select statement 
+            (and transforming / projecting in the select clause)
 
+            "Code earlier in this walkthrough indicated that the average class 
+            score is approximately 334[that is without the student I added]. 
+            To produce a sequence of Students whose total score is greater than 
+            the class average, together with their Student ID, you can use an 
+            anonymous type in the select statement":
+            */
 
+            Console.WriteLine("\n----8----\n");
 
+            var studentQuery8 = from student in students
+                                let x = student.Scores.Sum()
+                                where x > averageScore
+                                select new { id = student.ID, score = x };
+            foreach (var item in studentQuery8)
+                Console.WriteLine("Student ID: {0}, Score: {1}", item.id, item.score);
+            
             Console.ReadLine();
 
         }
