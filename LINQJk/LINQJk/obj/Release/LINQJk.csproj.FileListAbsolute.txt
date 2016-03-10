@@ -1,0 +1,6 @@
+D:\c#\Source\Repos\CSharpPracticeJk\LINQJk\LINQJk\bin\Release\LINQJk.exe.config
+D:\c#\Source\Repos\CSharpPracticeJk\LINQJk\LINQJk\bin\Release\LINQJk.exe
+D:\c#\Source\Repos\CSharpPracticeJk\LINQJk\LINQJk\bin\Release\LINQJk.pdb
+D:\c#\Source\Repos\CSharpPracticeJk\LINQJk\LINQJk\obj\Release\LINQJk.csprojResolveAssemblyReference.cache
+D:\c#\Source\Repos\CSharpPracticeJk\LINQJk\LINQJk\obj\Release\LINQJk.exe
+D:\c#\Source\Repos\CSharpPracticeJk\LINQJk\LINQJk\obj\Release\LINQJk.pdb
